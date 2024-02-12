@@ -1,0 +1,3 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+netdev_print_server.access_print_server,access_print_server,netdev_print_server.model_print_server,base.group_user,1,1,1,1
+netdev_print_server.access_printer,access_printer,netdev_print_server.model_printer,base.group_user,1,1,1,1

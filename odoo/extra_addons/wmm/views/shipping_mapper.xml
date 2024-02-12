@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="shipping_mapper_tree_view" model="ir.ui.view">
+            <field name="name">shipping.mapper.tree</field>
+            <field name="model">shipping.mapper</field>
+            <field name="arch" type="xml">
+            <tree editable="bottom">
+                    <field name="name" readonly="1"/>
+                    <field name="shipping"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="shipping_mapper_action" model="ir.actions.act_window">
+            <field name="name">Shipping Mapper</field>
+            <field name="res_model">shipping.mapper</field>
+            <field name="view_mode" >tree,form</field>
+            <field name="view_id" ref="shipping_mapper_tree_view"/>
+            <field name="help" type="html">
+                <p>Shipping mapper</p>
+            </field>
+
+        </record>
+
+
+
+
+    </data>
+
+</odoo>

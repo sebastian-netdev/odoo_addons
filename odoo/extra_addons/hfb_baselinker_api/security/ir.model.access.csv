@@ -1,0 +1,22 @@
+id,name,model_id/id,group_id/id,perm_read,perm_create,perm_write,perm_unlink
+bl_model_access_0,api_baselinker_0,model_baselinker,base.group_user,1,1,1,1
+bl_model_access_1,api_baselinker_1,model_baselinker_order_sources,base.group_user,1,1,1,1
+bl_model_access_2,api_baselinker_2,model_baselinker_status,base.group_user,1,1,1,1
+bl_model_access_3,api_baselinker_3,model_baselinker_config_settings,base.group_user,1,1,1,1
+bl_model_access_4,api_baselinker_4,model_blapi,base.group_user,1,1,1,1
+bl_model_access_5,api_baselinker_5,model_bl_inventories,base.group_user,1,1,1,1
+bl_model_access_6,api_baselinker_6,model_baselinker_inventory_integrations,base.group_user,1,1,1,1
+bl_model_assecc_7,api_baselinker_7,model_bl_inventorywarehouses,base.group_user,1,1,1,1
+bl_model_access_8,api_baselinker_8,model_bl_storages,base.group_user,1,1,1,1
+bl_model_access_9,api_baselinker_9,model_bl_externalstorages,base.group_user,1,1,1,1
+
+hfb_baselinker_api.access_bl_images,access_bl_images,hfb_baselinker_api.model_bl_images,base.group_user,1,0,0,0
+hfb_baselinker_api.access_bl_links,access_bl_links,hfb_baselinker_api.model_bl_links,base.group_user,1,0,0,0
+hfb_baselinker_api.access_bl_methods,access_bl_methods,hfb_baselinker_api.model_bl_methods,base.group_user,1,0,0,0
+hfb_baselinker_api.access_bl_text_fields,access_bl_text_fields,hfb_baselinker_api.model_bl_text_fields,base.group_user,1,0,0,0
+
+access_product_image_public,product.image public,model_product_image,,1,0,0,0
+access_product_image_sale,product.image sale,model_product_image,sales_team.group_sale_manager,1,1,1,1
+
+access_hfbsystem,api_hfbsystem,model_hfbsystem,base.group_user,1,1,1,1
+

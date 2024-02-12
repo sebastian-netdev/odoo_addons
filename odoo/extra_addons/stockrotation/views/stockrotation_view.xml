@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+	<menuitem name="Stock Rotation" id="menu_root_stock_rotation" web_icon="stockrotation,static/description/icon.png">
+
+
+	</menuitem>
+    <data>
+       <record id="product_template_last_delivery_inherit" model="ir.ui.view">
+            <field name="name">product.product.view.form.extended</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@name='inventory']" position="after">
+                    <page string="Stock rotation">
+                        <group name="Stock data" string="Stock rotation">
+                            <field name="product_active"/>
+                            <field name="last_update"/>
+                            <field name="est_rotation"/>
+                            <field name="stock_after_period" readonly="1"/>
+                            <field name="dst_rotation" readonly="1"/>
+                            <field name="daily_rotation" readonly="1"/>
+                            <field name="first_delivery" readonly="1"/>
+                            <field name="total_income" readonly="1"/>
+                            <field name="total_outgoing" readonly="1"/>
+							<field name="product_tags" widget="many2many_tags" options="{'no_create': True,'color_field': 'color'}"/>
+                        </group>
+                        <group name="Sale data" string="Sale statistics">
+                            <field name="sales_last_period" readonly="1"/>
+                            <field name="avg_margin" readonly="1"/>
+                            <field name="avg_margin_period" readonly="1"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="res_config_stockrotation_settings_view_form" model="ir.ui.view">
+		<field name="name">rest.config.settings.view.form.inherit.account.rest</field>
+		<field name="model">res.config.settings</field>
+		<field name="priority" eval="50"/>
+		<field name="inherit_id" ref="base.res_config_settings_view_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//div[hasclass('app_settings_block')]" position="before">
+				<div class="app_settings_block" data-string="Stock rotation" string="Stock Rotation" data-key="stockrotation" >
+					<h2>
+						Stock rotation
+					</h2>
+					<div class="row mt16 o_settings_container" >
+
+						<div class="col-12 col-lg-6 o_setting_box" >
+							<div class="o_setting_left_pane" />
+							<div class="o_setting_right_pane" >
+								<span class="o_form_label" >
+									Stock rotation settings
+								</span>
+								<span class="fa fa-lg fa-building-o" title="Values set..." aria-label="Values set..." role="img" invisible="1" modifiers="{'invisible':true}"/>
+<!--								<div class="text-muted" >-->
+<!--								The authorization process-->
+<!--								</div>-->
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="inactive_delay" class="col-lg-3 o_light_label" />
+										<field name="inactive_delay"/>
+									</div>
+								</div>
+                                <div class="content-group" >
+									<div class="row mt16" >
+										<label for="stock_rotation" class="col-lg-3 o_light_label" />
+										<field name="stock_rotation"/>
+									</div>
+								</div>
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="rotation_period" class="col-lg-3 o_light_label" />
+										<field name="rotation_period"/>
+									</div>
+								</div>
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="low_stock_rotation_tag" class="col-lg-3 o_light_label" />
+										<field name="low_stock_rotation_tag"/>
+									</div>
+								</div>
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="high_stock_rotation_tag" class="col-lg-3 o_light_label" />
+										<field name="high_stock_rotation_tag"/>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="col-12 col-lg-6 o_setting_box" >
+							<div class="o_setting_right_pane" >
+								<span class="o_form_label" >
+									Sales settings
+								</span>
+								<span class="fa fa-lg fa-building-o" title="Values set..." aria-label="Values set..." role="img" invisible="1" modifiers="{'invisible':true}"/>
+<!--								<div class="text-muted" >-->
+<!--								The authorization process-->
+<!--								</div>-->
+
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="low_margin_level" class="col-lg-3 o_light_label" />
+										<field name="low_margin_level" widget="percentage"/>
+									</div>
+								</div>
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="low_margin_tag" class="col-lg-3 o_light_label" />
+										<field name="low_margin_tag"/>
+									</div>
+								</div>
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="high_margin_level" class="col-lg-3 o_light_label" />
+										<field name="high_margin_level" widget="percentage"/>
+									</div>
+								</div>
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="high_margin_tag" class="col-lg-3 o_light_label" />
+										<field name="high_margin_tag"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-lg-6 o_setting_box" >
+							<div class="o_setting_right_pane" >
+
+								<span class="o_form_label" >
+									Notification settings
+								</span>
+								<span class="fa fa-lg fa-building-o" title="Values set..." aria-label="Values set..." role="img" invisible="1" modifiers="{'invisible':true}"/>
+<!--								<div class="text-muted" >-->
+<!--								The authorization process-->
+<!--								</div>-->
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="low_stock_rotation_notify" class="col-lg-3 o_light_label" />
+										<field name="low_stock_rotation_notify"/>
+									</div>
+								</div>
+                                <div class="content-group" >
+									<div class="row mt16" >
+										<label for="high_stock_rotation_notify" class="col-lg-3 o_light_label" />
+										<field name="high_stock_rotation_notify"/>
+									</div>
+								</div>
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="low_margin_alert" class="col-lg-3 o_light_label" />
+										<field name="low_margin_alert"/>
+									</div>
+								</div>
+
+                                <div class="content-group" >
+									<div class="row mt16" >
+										<label for="notification_address" class="col-lg-3 o_light_label" />
+										<field name="notification_address"/>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+			</xpath>
+		</field>
+        </record>
+
+
+    </data>
+</odoo>
+

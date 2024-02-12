@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+               <record id="delviery_carrier_inherit" model="ir.ui.view">
+                    <field name="name">delivery.carrier.view.form.extended</field>
+                   <field name="model">delivery.carrier</field>
+                    <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='free_over']" position="after">
+                    <field name="short_name"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

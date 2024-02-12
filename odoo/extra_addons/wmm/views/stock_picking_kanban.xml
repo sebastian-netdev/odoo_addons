@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+       <record id="stock_picking_kanban_extra_fields" model="ir.ui.view">
+            <field name="name">stock.picking.kanban.extended</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.stock_picking_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('o_kanban_record_bottom')]" position="replace">
+                    <div class="o_kanban_record_bottom">
+                    <field name="is_packing" invisible="1"/>
+                    <field name="delivery_module" invisible="1"/>
+                    <field name="trolley_barcode" invisible="1"/>
+                     <t t-if="record.is_packing.raw_value">
+                         <div class="oe_kanban_bottom_left">
+                             <t t-if="record.delivery_module" t-esc="record.delivery_module.value.slice(0,10)"/>
+
+                         </div>
+                         <div class="oe_kanban_bottom_right">
+                            <t t-if="record.trolley_barcode" t-esc="record.trolley_barcode.value"/>
+                             <t t-else="" t-esc="Nieprzypisany"/>
+                         </div>
+                     </t>
+                    <t t-else="">
+                        <div class="oe_kanban_bottom_left">
+                            <t t-esc="record.partner_id.value"/>
+                            <field name="activity_ids" widget="kanban_activity"/>
+                            <field name="json_popover" nolabel="1" widget="stock_rescheduling_popover" attrs="{'invisible': [('json_popover', '=', False)]}"/>
+                        </div>
+                        <div class="oe_kanban_bottom_right">
+                            <t t-esc="record.scheduled_date.value and record.scheduled_date.value.split(' ')[0] or False"/>
+                        </div>
+                    </t>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

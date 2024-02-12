@@ -1,0 +1,657 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- vat_s_23 -->
+        <record id="inv_rep_line_K_19" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_19')]"/>
+            <field name="invoice_tax_id" ref="vat_s_23"/>
+        </record>
+
+        <record id="inv_rep_line_K_20" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart221"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_20')]"/>
+            <field name="invoice_tax_id" ref="vat_s_23"/>
+        </record>
+
+        <record id="refund_rep_line_K_19" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_19')]"/>
+            <field name="refund_tax_id" ref="vat_s_23"/>
+        </record>
+
+        <record id="refund_rep_line_K_20" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart221"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_20')]"/>
+            <field name="refund_tax_id" ref="vat_s_23"/>
+        </record>
+
+        <!-- vat_s_zw -->
+        <record id="inv_rep_line_K_10" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_10')]"/>
+            <field name="invoice_tax_id" ref="vat_s_zw"/>
+        </record>
+
+        <record id="inv_rep_line_vat_s_zw" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="invoice_tax_id" ref="vat_s_zw"/>
+        </record>
+
+        <record id="refund_rep_line_K_10" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_10')]"/>
+            <field name="refund_tax_id" ref="vat_s_zw"/>
+        </record>
+
+        <record id="refund_rep_line_vat_s_zw" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="refund_tax_id" ref="vat_s_zw"/>
+        </record>
+
+        <!-- ue_s_towary -->
+        <record id="inv_rep_line_K_21" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_21')]"/>
+            <field name="invoice_tax_id" ref="ue_s_towary"/>
+        </record>
+
+        <record id="inv_rep_line_tax_ue_s_towary" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="invoice_tax_id" ref="ue_s_towary"/>
+        </record>
+
+        <record id="refund_rep_line_K_21" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_21')]"/>
+            <field name="refund_tax_id" ref="ue_s_towary"/>
+        </record>
+
+        <record id="refund_rep_line_tax_ue_s_towary" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="refund_tax_id" ref="ue_s_towary"/>
+        </record>
+
+        <!-- ex_s_towary -->
+        <record id="inv_rep_line_K_22" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_22')]"/>
+            <field name="invoice_tax_id" ref="ex_s_towary"/>
+        </record>
+
+        <record id="inv_rep_line_tax_ex_s_towary" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="invoice_tax_id" ref="ex_s_towary"/>
+        </record>
+
+        <record id="refund_rep_line_K_22" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_22')]"/>
+            <field name="refund_tax_id" ref="ex_s_towary"/>
+        </record>
+
+        <record id="refund_rep_line_tax_ex_s_towary" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="refund_tax_id" ref="ex_s_towary"/>
+        </record>
+
+        <!-- ue_s_uslugi -->
+        <record id="inv_rep_line_K_11_12" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_11'), ref('trilab_jpk_vat.pl_jpk_K_12')]"/>
+            <field name="invoice_tax_id" ref="ue_s_uslugi"/>
+        </record>
+
+        <record id="inv_rep_line_tax_ue_s_uslugi" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="invoice_tax_id" ref="ue_s_uslugi"/>
+        </record>
+
+        <record id="refund_rep_line_K_11_12" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_11'), ref('trilab_jpk_vat.pl_jpk_K_12')]"/>
+            <field name="refund_tax_id" ref="ue_s_uslugi"/>
+        </record>
+
+        <record id="refund_rep_line_tax_ue_s_uslugi" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="refund_tax_id" ref="ue_s_uslugi"/>
+        </record>
+
+        <!-- ex_s_uslugi -->
+        <record id="inv_rep_line_K_11" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_11')]"/>
+            <field name="invoice_tax_id" ref="ex_s_uslugi"/>
+        </record>
+
+        <record id="inv_rep_line_tax_ex_s_uslugi" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="invoice_tax_id" ref="ex_s_uslugi"/>
+        </record>
+
+        <record id="refund_rep_line_K_11" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_11')]"/>
+            <field name="refund_tax_id" ref="ex_s_uslugi"/>
+        </record>
+
+        <record id="refund_rep_line_tax_ex_s_uslugi" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="refund_tax_id" ref="ex_s_uslugi"/>
+        </record>
+
+        <!-- vat_z_23 -->
+        <record id="inv_rep_line_K_45" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_45')]"/>
+            <field name="invoice_tax_id" ref="vat_z_23"/>
+        </record>
+
+        <record id="inv_rep_line_K_46" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_46')]"/>
+            <field name="invoice_tax_id" ref="vat_z_23"/>
+        </record>
+
+        <record id="refund_rep_line_K_45" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_45')]"/>
+            <field name="refund_tax_id" ref="vat_z_23"/>
+        </record>
+
+        <record id="refund_rep_line_K_46" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_46')]"/>
+            <field name="refund_tax_id" ref="vat_z_23"/>
+        </record>
+
+        <!-- vat_z_23_st_brutto -->
+        <record id="inv_rep_line_K_43" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_43')]"/>
+            <field name="invoice_tax_id" ref="vat_z_23_st_brutto"/>
+        </record>
+
+        <record id="inv_rep_line_K_44" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_44')]"/>
+            <field name="invoice_tax_id" ref="vat_z_23_st_brutto"/>
+        </record>
+
+        <record id="refund_rep_line_K_43" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_43')]"/>
+            <field name="refund_tax_id" ref="vat_z_23_st_brutto"/>
+        </record>
+
+        <record id="refund_rep_line_K_44" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_44')]"/>
+            <field name="refund_tax_id" ref="vat_z_23_st_brutto"/>
+        </record>
+
+        <!-- ue_z_23_towary -->
+        <record id="inv_rep_line_K_23_45" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_23'), ref('trilab_jpk_vat.pl_jpk_K_45')]"/>
+            <field name="invoice_tax_id" ref="ue_z_23_towary"/>
+        </record>
+
+        <record id="inv_rep_line_K_46_ue" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_46')]"/>
+            <field name="invoice_tax_id" ref="ue_z_23_towary"/>
+        </record>
+
+        <record id="inv_rep_line_K_24" model="account.tax.repartition.line.template">
+            <field name="factor_percent">-100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_24')]"/>
+            <field name="invoice_tax_id" ref="ue_z_23_towary"/>
+        </record>
+
+        <record id="refund_rep_line_K_23_45" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_23'), ref('trilab_jpk_vat.pl_jpk_K_45')]"/>
+            <field name="refund_tax_id" ref="ue_z_23_towary"/>
+        </record>
+
+        <record id="refund_rep_line_K_46_ue" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_46')]"/>
+            <field name="refund_tax_id" ref="ue_z_23_towary"/>
+        </record>
+
+        <record id="refund_rep_line_K_24" model="account.tax.repartition.line.template">
+            <field name="factor_percent">-100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_24')]"/>
+            <field name="refund_tax_id" ref="ue_z_23_towary"/>
+        </record>
+
+        <!-- ue_z_23_towary -->
+        <record id="inv_rep_line_K_29_45" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_29'), ref('trilab_jpk_vat.pl_jpk_K_45')]"/>
+            <field name="invoice_tax_id" ref="ue_z_23_uslugi"/>
+        </record>
+
+        <record id="inv_rep_line_K_46_ue_services" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_46')]"/>
+            <field name="invoice_tax_id" ref="ue_z_23_uslugi"/>
+        </record>
+
+        <record id="inv_rep_line_K_30" model="account.tax.repartition.line.template">
+            <field name="factor_percent">-100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_30')]"/>
+            <field name="invoice_tax_id" ref="ue_z_23_uslugi"/>
+        </record>
+
+        <record id="refund_rep_line_K_29_45" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_23'), ref('trilab_jpk_vat.pl_jpk_K_45')]"/>
+            <field name="refund_tax_id" ref="ue_z_23_uslugi"/>
+        </record>
+
+        <record id="refund_rep_line_K_46_ue_services" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_46')]"/>
+            <field name="refund_tax_id" ref="ue_z_23_uslugi"/>
+        </record>
+
+        <record id="refund_rep_line_K_30" model="account.tax.repartition.line.template">
+            <field name="factor_percent">-100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_30')]"/>
+            <field name="refund_tax_id" ref="ue_z_23_uslugi"/>
+        </record>
+
+        <!-- im_z_23_uslugi -->
+        <record id="inv_rep_line_K_27_45" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_27'), ref('trilab_jpk_vat.pl_jpk_K_45')]"/>
+            <field name="invoice_tax_id" ref="im_z_23_uslugi"/>
+        </record>
+
+        <record id="inv_rep_line_K_46_im_services" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_46')]"/>
+            <field name="invoice_tax_id" ref="im_z_23_uslugi"/>
+        </record>
+
+        <record id="inv_rep_line_K_28" model="account.tax.repartition.line.template">
+            <field name="factor_percent">-100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_28')]"/>
+            <field name="invoice_tax_id" ref="im_z_23_uslugi"/>
+        </record>
+
+        <record id="refund_rep_line_K_27_45" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_27'), ref('trilab_jpk_vat.pl_jpk_K_45')]"/>
+            <field name="refund_tax_id" ref="im_z_23_uslugi"/>
+        </record>
+
+        <record id="refund_rep_line_K_46_im_services" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_46')]"/>
+            <field name="refund_tax_id" ref="im_z_23_uslugi"/>
+        </record>
+
+        <record id="refund_rep_line_K_28" model="account.tax.repartition.line.template">
+            <field name="factor_percent">-100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_28')]"/>
+            <field name="refund_tax_id" ref="im_z_23_uslugi"/>
+        </record>
+
+        <!-- vat_z_23_brutto -->
+        <record id="inv_rep_line_K_45_vat_z_23_brutto" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_45')]"/>
+            <field name="invoice_tax_id" ref="vat_z_23_brutto"/>
+        </record>
+
+        <record id="inv_rep_line_K_46_vat_z_23_brutto" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_46')]"/>
+            <field name="invoice_tax_id" ref="vat_z_23_brutto"/>
+        </record>
+
+        <record id="refund_rep_line_K_45_vat_z_23_brutto" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_45')]"/>
+            <field name="refund_tax_id" ref="vat_z_23_brutto"/>
+        </record>
+
+        <record id="refund_rep_line_K_46_vat_z_23_brutto" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_46')]"/>
+            <field name="refund_tax_id" ref="vat_z_23_brutto"/>
+        </record>
+
+        <!-- vat_z_23_st -->
+        <record id="inv_rep_line_K_43_vat_z_23_st" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_43')]"/>
+            <field name="invoice_tax_id" ref="vat_z_23_st"/>
+        </record>
+
+        <record id="inv_rep_line_K_44_vat_z_23_st" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_43')]"/>
+            <field name="invoice_tax_id" ref="vat_z_23_st"/>
+        </record>
+
+        <record id="refund_rep_line_K_43_vat_z_23_st" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_43')]"/>
+            <field name="refund_tax_id" ref="vat_z_23_st"/>
+        </record>
+
+        <record id="refund_rep_line_K_44_vat_z_23_st" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_44')]"/>
+            <field name="refund_tax_id" ref="vat_z_23_st"/>
+        </record>
+
+        <!-- im_z_23_towary -->
+        <record id="inv_rep_line_K_25_45" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_25'), ref('trilab_jpk_vat.pl_jpk_K_45')]"/>
+            <field name="invoice_tax_id" ref="im_z_23_towary"/>
+        </record>
+
+        <record id="inv_rep_line_K_46_im_z_23_towary" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_46')]"/>
+            <field name="invoice_tax_id" ref="im_z_23_towary"/>
+        </record>
+
+        <record id="inv_rep_line_K_26" model="account.tax.repartition.line.template">
+            <field name="factor_percent">-100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_26')]"/>
+            <field name="invoice_tax_id" ref="im_z_23_towary"/>
+        </record>
+
+        <record id="refund_rep_line_K_25_45" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_25'), ref('trilab_jpk_vat.pl_jpk_K_45')]"/>
+            <field name="refund_tax_id" ref="im_z_23_towary"/>
+        </record>
+
+        <record id="refund_rep_line_K_46_im_z_23_towary" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_46')]"/>
+            <field name="refund_tax_id" ref="im_z_23_towary"/>
+        </record>
+
+        <record id="refund_rep_line_K_26" model="account.tax.repartition.line.template">
+            <field name="factor_percent">-100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_26')]"/>
+            <field name="refund_tax_id" ref="im_z_23_towary"/>
+        </record>
+
+        <!-- vat_z_8_brutto -->
+        <record id="inv_rep_line_K_45_vat_z_8_brutto" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_45')]"/>
+            <field name="invoice_tax_id" ref="vat_z_8_brutto"/>
+        </record>
+
+        <record id="inv_rep_line_K_46_vat_z_8_brutto" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_46')]"/>
+            <field name="invoice_tax_id" ref="vat_z_8_brutto"/>
+        </record>
+
+        <record id="refund_rep_line_K_45_vat_z_8_brutto" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_45')]"/>
+            <field name="refund_tax_id" ref="vat_z_8_brutto"/>
+        </record>
+
+        <record id="refund_rep_line_K_46_vat_z_8_brutto" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_46')]"/>
+            <field name="refund_tax_id" ref="vat_z_8_brutto"/>
+        </record>
+
+        <!-- vat_z_5_brutto -->
+        <record id="inv_rep_line_K_45_vat_z_5_brutto" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_45')]"/>
+            <field name="invoice_tax_id" ref="vat_z_5_brutto"/>
+        </record>
+
+        <record id="inv_rep_line_K_46_vat_z_5_brutto" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_46')]"/>
+            <field name="invoice_tax_id" ref="vat_z_5_brutto"/>
+        </record>
+
+        <record id="refund_rep_line_K_45_vat_z_5_brutto" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_45')]"/>
+            <field name="refund_tax_id" ref="vat_z_5_brutto"/>
+        </record>
+
+        <record id="refund_rep_line_K_46_vat_z_5_brutto" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_46')]"/>
+            <field name="refund_tax_id" ref="vat_z_5_brutto"/>
+        </record>
+
+        <!-- vat_z_8 -->
+        <record id="inv_rep_line_K_45_vat_z_8" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_45')]"/>
+            <field name="invoice_tax_id" ref="vat_z_8"/>
+        </record>
+
+        <record id="inv_rep_line_K_46_vat_z_8" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_46')]"/>
+            <field name="invoice_tax_id" ref="vat_z_8"/>
+        </record>
+
+        <record id="refund_rep_line_K_45_vat_z_8" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_45')]"/>
+            <field name="refund_tax_id" ref="vat_z_8"/>
+        </record>
+
+        <record id="refund_rep_line_K_46_vat_z_8" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_46')]"/>
+            <field name="refund_tax_id" ref="vat_z_8"/>
+        </record>
+
+        <!-- vat_z_5 -->
+        <record id="inv_rep_line_K_45_vat_z_5" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_45')]"/>
+            <field name="invoice_tax_id" ref="vat_z_5"/>
+        </record>
+
+        <record id="inv_rep_line_K_46_vat_z_5" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_46')]"/>
+            <field name="invoice_tax_id" ref="vat_z_5"/>
+        </record>
+
+        <record id="refund_rep_line_K_45_vat_z_5" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_45')]"/>
+            <field name="refund_tax_id" ref="vat_z_5"/>
+        </record>
+
+        <record id="refund_rep_line_K_46_vat_z_5" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="account_id" ref="chart222"/>
+            <field name="tag_ids" eval="[ref('trilab_jpk_vat.pl_jpk_K_46')]"/>
+            <field name="refund_tax_id" ref="vat_z_5"/>
+        </record>
+
+        <!-- vat_z_0 -->
+        <record id="inv_rep_line_vat_z_0" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="invoice_tax_id" ref="vat_z_0"/>
+        </record>
+
+        <record id="inv_rep_line_vat_z_0_tax" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="invoice_tax_id" ref="vat_z_0"/>
+        </record>
+
+        <record id="refund_rep_line_vat_z_0" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="refund_tax_id" ref="vat_z_0"/>
+        </record>
+
+        <record id="refund_rep_line_vat_z_0_tax" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="refund_tax_id" ref="vat_z_0"/>
+        </record>
+
+        <!-- vat_z_zw -->
+        <record id="inv_rep_line_vat_z_zw" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="invoice_tax_id" ref="vat_z_zw"/>
+        </record>
+
+        <record id="inv_rep_line_vat_z_zw_tax" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="invoice_tax_id" ref="vat_z_zw"/>
+        </record>
+
+        <record id="refund_rep_line_vat_z_zw" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">base</field>
+            <field name="refund_tax_id" ref="vat_z_zw"/>
+        </record>
+
+        <record id="refund_rep_line_vat_z_zw_tax" model="account.tax.repartition.line.template">
+            <field name="factor_percent">100</field>
+            <field name="repartition_type">tax</field>
+            <field name="refund_tax_id" ref="vat_z_zw"/>
+        </record>
+
+    </data>
+</odoo>

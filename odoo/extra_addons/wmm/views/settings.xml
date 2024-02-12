@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+         <record id="res_config_wmm_settings_view_form" model="ir.ui.view">
+		<field name="name">rest.config.settings.view.form.inherit.account.rest</field>
+		<field name="model">res.config.settings</field>
+		<field name="priority" eval="50"/>
+		<field name="inherit_id" ref="base.res_config_settings_view_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//div[hasclass('app_settings_block')]" position="before">
+				<div class="app_settings_block" data-string="wmm" string="Warehouse management module" data-key="wmm" >
+					<h2>
+						Warehouse management module
+					</h2>
+					<div class="row mt16 o_settings_container" >
+						<div class="col-12 col-lg-6 o_setting_box" >
+							<div class="o_setting_left_pane" />
+							<div class="o_setting_right_pane" >
+								<span class="o_form_label" >
+									WMM Settings
+								</span>
+								<span class="fa fa-lg fa-building-o" title="Values set..." aria-label="Values set..." role="img" invisible="1" modifiers="{'invisible':true}"/>
+<!--								<div class="text-muted" >-->
+<!--								The authorization process-->
+<!--								</div>-->
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="oversize_weigh" class="col-lg-3 o_light_label" />
+										<field name="oversize_weigh"/>
+									</div>
+									<div class="row mt16" >
+										<label for="sort_pos_by" class="col-lg-3 o_light_label" />
+										<field name="sort_pos_by"/>
+									</div>
+									<div class="row mt16" >
+										<label for="positions_count" class="col-lg-3 o_light_label" />
+										<field name="positions_count"/>
+									</div>
+									<div class="row mt16" >
+										<label for="orders_count" class="col-lg-3 o_light_label" />
+										<field name="orders_count"/>
+									</div>
+									<div class="row mt16" >
+										<label for="picking_type" class="col-lg-3 o_light_label" />
+										<field name="picking_type"/>
+									</div>
+									<div class="row mt16" >
+										<label for="print_on" class="col-lg-3 o_light_label" />
+										<field name="print_on"/>
+									</div>
+									<div class="row mt16" >
+										<label for="update_baselinker_status" class="col-lg-3 o_light_label" />
+										<field name="update_baselinker_status"/>
+									</div>
+									<div class="row mt16" >
+										<label for="status_after_packing" class="col-lg-3 o_light_label" />
+										<field name="status_after_packing"/>
+									</div>
+									<div class="row mt16" >
+										<label for="status_after_picking" class="col-lg-3 o_light_label" />
+										<field name="status_after_picking"/>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</xpath>
+		</field>
+        </record>
+
+
+    </data>
+</odoo>

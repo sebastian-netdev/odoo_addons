@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="001_BaseLinker_Synchro_Stock_Down" model="ir.cron">
+        <field name="name">001 BaseLinker Synchro Stock Down</field>
+        <field name="model_id" ref="model_bl_inventories"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_sync_products_stock()</field>
+        <field name="active" eval="False"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">hours</field>
+        <field name="numbercall">-1</field>
+    </record>
+
+	<record id="002_BaseLinker_Synchro_Stock_Up" model="ir.cron">
+        <field name="name">002 BaseLinker Synchro Stock Up</field>
+        <field name="model_id" ref="model_bl_inventories"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_sync_products_stock_up()</field>
+        <field name="active" eval="False"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">hours</field>
+        <field name="numbercall">-1</field>
+    </record>
+
+	<record id="003_BaseLinker_Synchro_Get_Orders" model="ir.cron">
+        <field name="name">003 BaseLinker Synchro Get Orders</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="state">code</field>
+        <field name="code">model.bl_getOrders()</field>
+        <field name="active" eval="False"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">hours</field>
+        <field name="numbercall">-1</field>
+    </record>
+
+	<record id="004_BaseLinker_Synchro_getProducts" model="ir.cron">
+        <field name="name">004 BaseLinker Synchro Get Products</field>
+        <field name="model_id" ref="model_bl_inventories"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_download_inventories_products()</field>
+        <field name="active" eval="False"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">hours</field>
+        <field name="numbercall">-1</field>
+    </record>
+
+	<record id="005_BaseLinker_Synchro_getOrderSourcesList" model="ir.cron">
+        <field name="name">005 BaseLinker Synchro Get Order Sources List</field>
+        <field name="model_id" ref="model_baselinker_order_sources"/>
+        <field name="state">code</field>
+        <field name="code">model.getOrderSourcesList()</field>
+        <field name="active" eval="False"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">hours</field>
+        <field name="numbercall">-1</field>
+    </record>
+
+	<record id="006_BaseLinker_Synchro_getOrderStatusList" model="ir.cron">
+        <field name="name">006 BaseLinker Synchro Get Order Status List</field>
+        <field name="model_id" ref="model_baselinker_status"/>
+        <field name="state">code</field>
+        <field name="code">model.getOrderStatusList()</field>
+        <field name="active" eval="False"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">hours</field>
+        <field name="numbercall">-1</field>
+    </record>
+
+
+</odoo>

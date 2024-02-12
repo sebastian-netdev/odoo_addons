@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+stockrotation.access_product_tag,access_product_tag,stockrotation.model_product_tag,base.group_user,1,1,1,1
+stockrotation.access_stockrotation_settings,access_stockrotation_settings,stockrotation.model_stockrotation_settings,base.group_user,1,1,1,1

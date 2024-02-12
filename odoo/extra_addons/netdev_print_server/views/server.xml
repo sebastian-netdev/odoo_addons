@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem name="Print Server" id="menu_root_print_server" web_icon="netdev_print_server,static/description/icon.png">
+        <menuitem id="menu_print_server" name="Printers">
+            <menuitem id="menu_printers" name="Printers List" action="printers_action"/>
+        </menuitem>
+
+    </menuitem>
+
+
+
+</odoo>

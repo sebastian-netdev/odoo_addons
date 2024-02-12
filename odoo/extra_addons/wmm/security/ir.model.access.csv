@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+wmm.access_wmm_settings,access_wmm_settings,wmm.model_wmm_settings,base.group_user,1,1,1,1
+wmm.access_shipping_mapper,access_shipping_mapper,wmm.model_shipping_mapper,base.group_user,1,1,1,1

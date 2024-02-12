@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem name="Warehouse management module" id="menu_root_print_server" web_icon="wmm,static/description/icon.png">
+        <menuitem id="menu_print_server" name="Shipping mapper">
+            <menuitem id="menu_shipping_mappers" name="Mappers list" action="shipping_mapper_action"/>
+        </menuitem>
+
+    </menuitem>
+
+
+
+</odoo>

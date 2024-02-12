@@ -1,0 +1,956 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+	<!-- Extend Settings  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <record id="hfb_res_config_baselinker_settings_view_form" model="ir.ui.view">
+        <field name="name">hfb.rest.config.settings.view.form.inherit.account.rest</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="150"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+
+			<xpath expr="//header" position="inside">
+				<button string="dbName" type="object" name="odoo_dbname" />
+			</xpath>
+
+		</field>
+	</record>
+
+	<!-- Extend Tax  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <record id="hfb_res_config_baselinker_settings_view_tax_form" model="ir.ui.view">
+        <field name="name">hfb_res_config_baselinker_settings_view_tax_form</field>
+        <field name="model">account.tax</field>
+        <field name="priority" eval="10"/>
+        <field name="inherit_id" ref="account.view_tax_tree"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='active']" position="after">
+                <field name="in_baselinker" widget="boolean_toggle"/>
+            </xpath>
+
+        </field>
+    </record>
+
+
+
+	<!-- Extend Order - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<record model="ir.ui.view" id="view_hfb_baselinker_sale_order_form">
+		<field name="name">view.hfb.baselinker.sale.order.form</field>
+		<field name="model">sale.order</field>
+		<field name="inherit_id" ref="sale.view_order_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='state']" position="after">
+				<field name="bl_status" widget="statusbar" statusbar_visible="draft,registered"/>
+			</xpath>
+			<xpath expr="//header" position="inside">
+				<field name="bl_status_id" invisible="1" />
+				<button string="Ustaw Status w BL" name="button_set_order_status" type="object" 
+					class="oe_stat_button" icon="fa-flag" attrs="{'invisible': [('bl_status_id','in',[None,False,''])]}"/>
+			</xpath>
+			<xpath expr="//header" position="inside">
+				<button string="Zwrot w BL" name="button_set_order_return_status" type="object"
+					class="oe_stat_button" icon="fa-flag"/>
+			</xpath>
+			<xpath expr="//field[@name='validity_date']" position="before">
+				<field name="bl_status_id" widget="many2one_tags" attrs="{'invisible': [('bl_status_id','in',[None,False,''])]}"/>
+				<field name="bl_order_source" attrs="{'invisible': [('bl_status_id','in',[None,False,''])]}" />
+			</xpath>
+
+			<xpath expr="//field[@name='client_order_ref']" position="after">
+				<field name="bl_order_url" widget="url" />
+			</xpath>
+
+			<!--xpath expr="//header" position="inside">
+				<button string="Zarejestruj w BL" name="bl_addOrder" type="object" 
+					class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible': ['|',('state', 'in', ['draft']),('bl_status','in',['registered'])]}" />
+			</xpath-->
+
+		</field>
+	</record>
+
+	<!-- Extend Order Tree  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<record model="ir.ui.view" id="view_hfb_baselinker_sale_view_quotation_tree">
+		<field name="name">view.hfb.baselinker.sale.view_quotation_tree</field>
+		<field name="model">sale.order</field>
+		<field name="inherit_id" ref="sale.view_quotation_tree" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='currency_id']" position="after">
+				<field name="bl_order_source" />
+				<field name="bl_status_id" string="BL Status" />
+				<field name="bl_status"	string="Stan Zamówienia" />
+			</xpath>
+
+		</field>
+	</record>
+
+
+	<!-- Extend Product Tree  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<record model="ir.ui.view" id="view_hfb_baselinker_product_product_product_tree_view">
+		<field name="name">view.hfb.baselinker.product.product.product.tree.view</field>
+		<field name="model">product.product</field>
+		<field name="inherit_id" ref="product.product_product_tree_view" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='name']" position="replace">
+				<field name="name" invisible="1"/>
+				<field name="bl_name" readonly="1"/>
+			</xpath>
+
+			<xpath expr="//field[@name='lst_price']" position="replace">
+				<field name="lst_price" invisible="1" optional="show" string="Sales Price"/>
+				<field name="bl_price" readonly="1" string="Price"/>
+			</xpath>
+
+		</field>
+	</record>
+
+
+	<!-- BaseLinker Inventory Warehouses  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<record model="ir.ui.view" id="view_hfb_baselinker_inventorywarehouses_form">
+		<field name="name">view.hfb.baselinker.inventorywarehouses.form</field>
+		<field name="model">bl_inventorywarehouses</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<div class="oe_title">
+						<h1>
+							<field name="name" readonly="1" />
+						</h1>
+					</div>
+					<group>
+						<field name="stock_location_id" domain="[('usage','=','internal')]" />
+						<separator />
+						<field name="warehouse_type" readonly="1" />
+						<field name="warehouse_id" readonly="1" />
+						<field name="stock_edition" readonly="1" />
+						<field name="is_default" readonly="1" />
+						<field name="description" readonly="1" />
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="view_hfb_baselinker_inventorywarehouses_tree">
+		<field name="name">view.hfb.baselinker.inventorywarehouses.tree</field>
+		<field name="model">bl_inventorywarehouses</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="warehouse_type" />
+				<field name="warehouse_id" />
+				<field name="name" />
+				<field name="description" />
+				<field name="is_default" />
+				<field name="stock_location_id" />
+			</tree>
+		</field>
+	</record>
+
+	<!-- BaseLinker External Storage List - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<record model="ir.ui.view" id="view_hfb_baselinker_externalstoragelist_form">
+		<field name="name">view.hfb.baselinker.externalstoragelist.form</field>
+		<field name="model">bl_externalstorages</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<div class="oe_title">
+						<h1>
+							<field name="name" readonly="1" />
+						</h1>
+					</div>
+					<group>
+						<field name="storage_id" readonly="1" />
+						<field name="methods" readonly="1" />
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="view_hfb_baselinker_externalstoragelist_tree">
+		<field name="name">view.hfb.baselinker.externalstoragelist.tree</field>
+		<field name="model">bl_externalstorages</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="storage_id" />
+				<field name="name" />
+			</tree>
+		</field>
+	</record>
+
+
+	<!-- BaseLinker Inventory Storage List - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<record model="ir.ui.view" id="view_hfb_baselinker_storagelist_form">
+		<field name="name">view.hfb.baselinker.storagelist.form</field>
+		<field name="model">bl_storages</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<div class="oe_title">
+						<h1>
+							<field name="name" readonly="1" />
+						</h1>
+					</div>
+					<group>
+						<field name="storage_id" readonly="1" />
+						<field name="methods" readonly="1" />
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="view_hfb_baselinker_storagelist_tree">
+		<field name="name">view.hfb.baselinker.storagelist.tree</field>
+		<field name="model">bl_storages</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="storage_id" />
+				<field name="name" />
+			</tree>
+		</field>
+	</record>
+
+
+	<!-- BaseLinker Order Sources - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<record model="ir.ui.view" id="view_hfb_baselinker_sources_form">
+		<field name="name">view.hfb.baselinker.sources.form</field>
+		<field name="model">baselinker.order.sources</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<div class="oe_title">
+						<h1>
+							<field name="name" readonly="1" />
+						</h1>
+					</div>
+					<group>
+						<field name="bl_id" readonly="1" />
+						<field name="source" readonly="1" />
+						<field name="company_id" required="1" />
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="view_hfb_baselinker_sources_tree">
+		<field name="name">view.hfb.baselinker.sources.tree</field>
+		<field name="model">baselinker.order.sources</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="bl_id" />
+				<field name="name" />
+				<field name="source" />
+				<field name="company_id" />
+			</tree>
+		</field>
+	</record>
+
+	<!-- BaseLinker Inventories  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<record model="ir.ui.view" id="view_hfb_baselinker_inventories_form">
+		<field name="name">view.hfb.baselinker.inventories.form</field>
+		<field name="model">bl_inventories</field>
+		<field name="arch" type="xml">
+			<form>
+				<header>
+					<!--button string="Sync Products" type="object" name="sync_product_catalog" class="btn-primary"  /-->
+					<field name="state" widget="statusbar" statusbar_visible="idle,product,stock"/>
+
+					<button string="Download Products" type="object" name="download_inventory_products" class="btn-primary" 
+							attrs="{'invisible': [('state','not in',[None,False,'idle','create_required','update_required'])]}" />
+					<button string="Sync Stock Down" type="object" name="sync_product_stock" class="btn-primary" 
+							attrs="{'invisible': [('state','not in',[None,False,'idle','create_required','update_required'])]}" />
+					<button string="Sync Stock Up" type="object" name="sync_product_stock_up" class="btn-primary" 
+							attrs="{'invisible': [('state','not in',[None,False,'idle','create_required','update_required'])]}" />
+					<button string="Reset IDLE" type="object" name="reset_idle" 
+							attrs="{'invisible': [('state','in',[None,False,'idle'])]}" />
+
+
+				</header>
+				<sheet>
+					<div class="oe_title">
+						<h1>
+							<field name="name" readonly="1" />
+						</h1>
+					</div>
+					<group name="Catalog" string="BaseLinker">
+						<group>
+							<field name="inventory_id" />
+							<field name="languages" />
+							<field name="default_language"  />
+							<field name="description" />
+						</group>
+						<group>
+							<field name="price_groups" />
+							<field name="default_price_group" />
+							<field name="warehouses" />
+							<field name="default_warehouse" />
+						</group>
+						<group>
+							<field name="reservations" />
+							<field name="is_default" />
+							<field name="in_use" />
+							<field name="number" />
+						</group>
+					</group>
+					<notebook>
+						<page name="supplier" string="Supplier" >
+							<field name="id" invisible="1"/>
+							<field name="supplier_ids" context="{'res_partner_search_mode': 'supplier', 'show_vat': True}"  />
+						</page>
+						<page name="route" string="Route" >
+							<field name="route_ids" />
+						</page>
+					</notebook>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids"/>
+					<field name="activity_ids"/>
+					<field name="message_ids"/>
+				</div>
+			</form>
+		</field>
+	</record>
+
+
+	<record model="ir.ui.view" id="view_hfb_baselinker_bl_inventories_tree">
+		<field name="name">view.hfb.baselinker.bl_inventories.tree</field>
+		<field name="model">bl_inventories</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="inventory_id" />
+				<field name="name" />
+				<field name="price_groups" />
+				<field name="warehouses" />
+				<field name="is_default" />
+				<field name="in_use" />
+				<field name="state"/>
+			</tree>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="view_hfb_baselinker_inventories_integration_tree">
+		<field name="name">view.hfb.baselinker.inventories.integration.tree</field>
+		<field name="model">baselinker.inventory.integrations</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name" />
+				<field name="langs" />
+				<field name="langs_ids" widget="many2many_tags" />
+				<field name="accounts" />
+			</tree>
+		</field>
+	</record>
+
+	
+
+
+	<!-- BaseLinker Order Status VIEWs  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<record model="ir.ui.view" id="view_hfb_baselinker_status_form">
+		<field name="name">view.hfb.baselinker.status.form</field>
+		<field name="model">baselinker.status</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<div class="oe_title">
+						<h1>
+							<field name="name" readonly="1" />
+						</h1>
+					</div>
+					<group>
+						<field name="name_for_customer" readonly="1" />
+						<field name="bl_id" readonly="1" />
+						<field name="color" readonly="1" />
+						<field name="status" required="1" />
+						<field name="state" />
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+
+	<record model="ir.ui.view" id="view_hfb_baselinker_status_tree">
+		<field name="name">view.hfb.baselinker.status.tree</field>
+		<field name="model">baselinker.status</field>
+		<field name="arch" type="xml">
+			<tree string="BaseLinker Status" default_order="id desc" 
+				decoration-success="status=='delivered'" 
+				decoration-info="status=='new'" 
+				decoration-bf="status=='dispatched'"
+				decoration-primary="status=='topaid'"
+				decoration-danger="status=='cancel'" >
+				<field name="name"/>
+				<field name="name_for_customer"/>
+				<field name="bl_id"/>
+				<field name="color"/>
+				<field name="status"/>
+				<field name="state"/>
+			</tree>
+		</field>
+	</record>
+
+	<!-- Extended View in Account Tax Form  -->
+	<record model="ir.ui.view" id="baselinker_account_view_tax_form">
+		<field name="name">baselinker.account.view.tax.form</field>
+		<field name="model">account.tax</field>
+		<field name="inherit_id" ref="account.view_tax_form" />
+		<field name="priority" eval="15"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='active']" position="after">
+				<field name="in_baselinker" widget="boolean_toggle"/>
+			</xpath>
+		</field>
+	</record>
+
+
+	<!-- Extended View in Product Category Form  -->
+	<record model="ir.ui.view" id="baselinker_product_category_form_view">
+		<field name="name">baselinker.product.category.form.view</field>
+		<field name="model">product.category</field>
+		<field name="inherit_id" ref="product.product_category_form_view" />
+		<field name="priority" eval="15"/>
+		<field name="arch" type="xml">
+
+			<xpath expr="//sheet" position="before">
+				<header>
+					<field name="bl_status" widget="statusbar" statusbar_visible="draft,registered,err,other"/>
+					<button string="Register in BaseLinker" type="object" name="baselinker_register" class="btn-primary" 
+						attrs="{'invisible':[('bl_status','in',('updated','registered','err'))]}"/>
+					<button string="Update in BaseLinker" type="object" name="baselinker_update" class="btn-primary" 
+						attrs="{'invisible':[('bl_status','in',('draft','xerr'))]}"/>
+				</header>
+			</xpath>
+
+			<xpath expr="//sheet" position="after">
+				<div class="oe_chatter" >
+					<!--field name="message_follower_ids" widget="mail_followers" /-->
+					<!--field name="activity_ids" widget="mail_activity" /-->
+					<!--field name="message_ids" widget="mail_thread"  options="{'display_log_button': True}"/-->
+				</div>
+			</xpath>
+
+			<xpath expr="//group[@name='first']" position="after">
+				<group name="baselink">
+					<group string="BaseLink" >
+						<field name="bl_category_id" string="Category ID" />
+					</group>
+				</group>
+			</xpath>
+		</field>
+	</record>
+
+
+	<!-- Extended View in Product Template Form  -->
+	<record model="ir.ui.view" id="baselinker_product_product_form_view">
+		<field name="name">baselinker.product.product.form.view</field>
+		<field name="model">product.product</field>
+		<field name="inherit_id" ref="product.product_normal_form_view" />
+		<field name="priority" eval="15"/>
+		<field name="arch" type="xml">
+			<xpath expr="//header" position="inside">
+				<field name="bl_status" widget="statusbar" statusbar_visible="draft,registered,err,other"/>
+				<field name="bl_product_id" invisible="1" />
+				<field name="bl_variant_id" invisible="1" />
+				<!--button string="Register in BaseLinker" type="object" name="baselinker_register" class="btn-primary" groups="stock.group_stock_manager"
+						attrs="{'invisible':[('bl_status','in',('updated','registered','errX'))]}"/-->
+				<!--button string="Update in BaseLinker" type="object" name="baselinker_update" class="btn-primary" groups="stock.group_stock_manager"
+						attrs="{'invisible':[('bl_status','in',('draft','xerr'))]}"/-->
+
+				<button string="Update from BL" type="object" name="get_inventory_products_update" class="btn-primary" groups="stock.group_stock_manager"
+						attrs="{'invisible':[('bl_status','in',('xdraft','xerr'))]}" 
+						context="{'product_id': id, 
+								'bl_variant_id': bl_variant_id, 
+								'bl_product_id': bl_product_id, 
+								'inventory_id': bl_inventory_id, 
+								'create': False, 
+								'is_variant': True }" />
+
+			</xpath>
+
+
+			<xpath expr="//field[@name='name']" position="replace">
+				<field name="bl_name" class="text-break" />
+				<separator /><h4>
+					<field name="name" class="text-break" />
+				</h4>
+			</xpath>
+
+			<xpath expr="//field[@name='categ_id']" position="after">
+				<field name="bl_star" x-widget="rating"/>
+			</xpath>
+
+
+			<xpath expr="//field[@name='description']" position="before">
+				<group name="product_template_images" string="Extra Product Media">
+					<field name="product_template_image_ids" class="o_website_sale_image_list" context="{'default_name': name}" mode="kanban" add-label="Add a Media" nolabel="1"/>
+				</group>
+			</xpath>
+
+			<xpath expr="//group[@name='group_lots_and_weight']" position="inside">
+				<label for="bl_weight" />
+					<div class="o_row" name="volume">
+						<field name="bl_weight" />
+					</div>
+
+				<label for="bl_height" />
+                    <div class="o_row" name="volume">
+						<field name="bl_height" />
+					</div>
+
+				<label for="bl_width" />
+                    <div class="o_row" name="volume">
+					<field name="bl_width" />
+					</div>
+
+				<label for="bl_length" />
+                    <div class="o_row" name="volume">
+					<field name="bl_length" />
+					</div>
+
+			</xpath>
+
+
+			<xpath expr="//notebook" position="inside">
+				<page string="BaseLinker" name="baselinker_information" groups="base.group_user" >
+					<group name="Produkt">
+						<group>
+							<group>
+								<field name="bl_product_id" readonly="1" />
+								<field name="bl_variant_id" readonly="1" />
+								<separator />
+								<field name="bl_category_id" readonly="1" />
+								<field name="bl_storage_id" readonly="1" />
+							</group>
+							<group>
+								<field name="bl_inventory_id" readonly="1" />
+								<field name="bl_inventory_catalog_id" readonly="1" />
+								<!--field name="bl_category_name" readonly="1" /-->
+							</group>
+						</group>
+						<group>
+							<field name="bl_name"/>
+							<field name="bl_sku"/>
+							<field name="bl_ean"/>
+						</group>
+					</group>
+					<group name="Sprzedaż i Magazyn">
+						<group>
+							<group>
+								<field name="location_id" />
+								<field name="bl_location" />
+							</group>
+						</group>
+					</group>
+				</page>
+			</xpath>
+		</field>
+	</record>
+
+
+	<!-- BLAPI VIEWs  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<record model="ir.ui.view" id="view_hfb_rest_api_tree">
+		<field name="name">view.hfb.rest.api.tree</field>
+		<field name="model">blapi</field>
+		<field name="arch" type="xml">
+			<tree string="Communication Logs" create="false" default_order="id desc" 
+				decoration-success="state=='sent'" 
+				decoration-info="state=='draft'" 
+				decoration-danger="state=='err'" >
+				<field name="name"/>
+				<field name="direction"/>
+				<field name="create_date"/>
+				<field name="result_code"/>
+				<field name="state"/>
+			</tree>
+		</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="action_iapi">
+		<field name="name">API Logger</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">blapi</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{}</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="action_osl">
+		<field name="name">Order Status List</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">baselinker.status</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{}</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="action_osrc">
+		<field name="name">Order Sources</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">baselinker.order.sources</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{}</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="action_osci">
+		<field name="name">Catalog</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">bl_inventories</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{}</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="action_oii">
+		<field name="name">Inventory Integrations</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">baselinker.inventory.integrations</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{}</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="action_owig">
+		<field name="name">Inventory Warehouses</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">bl_inventorywarehouses</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{}</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="action_oisl">
+		<field name="name">Inventory Storage List</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">bl_storages</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{}</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="action_oesl">
+		<field name="name">External Storage List</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">bl_externalstorages</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{}</field>
+	</record>
+
+	<!--record id="action_gipld" model="ir.actions.server">
+		<field name="name">Get Inventory Product List Details</field>
+		<field name="type">ir.actions.server</field>
+		<field name="model_id" ref="model_bl_inventories" />
+		<field name="state">code</field>
+		<field name="code">model.cron_download_inventories_products()</field>
+	</record-->
+
+	<record id="action_gips" model="ir.actions.server">
+		<field name="name">Get Inventory Product Stock</field>
+		<field name="type">ir.actions.server</field>
+		<field name="model_id" ref="model_product_product" />
+		<field name="state">code</field>
+		<field name="code">model.getInventoryProductsStock()</field>
+	</record>
+
+	<!--record id="action_go" model="ir.actions.server">
+		<field name="name">Get Orders</field>
+		<field name="type">ir.actions.server</field>
+		<field name="model_id" ref="model_sale_order" />
+		<field name="state">code</field>
+		<field name="code">model.bl_getOrders()</field>
+	</record-->
+
+	<record id="action_gosl" model="ir.actions.server">
+		<field name="name">Get Order Status List</field>
+		<field name="type">ir.actions.server</field>
+		<field name="model_id" ref="model_baselinker_status" />
+		<field name="state">code</field>
+		<field name="code">model.getOrderStatusList()</field>
+	</record>
+
+	<record id="action_gos" model="ir.actions.server">
+		<field name="name">Get Order Sources</field>
+		<field name="type">ir.actions.server</field>
+		<field name="model_id" ref="model_baselinker_order_sources" />
+		<field name="state">code</field>
+		<field name="code">model.getOrderSourcesList()</field>
+	</record>
+
+	<record id="action_iii" model="ir.actions.server">
+		<field name="name">Get Inventory Integrations</field>
+		<field name="type">ir.actions.server</field>
+		<field name="model_id" ref="model_baselinker_inventory_integrations" />
+		<field name="state">code</field>
+		<field name="code">model.getInventoryIntegrations()</field>
+	</record>
+
+	<record id="action_giw" model="ir.actions.server">
+		<field name="name">Get Inventory Warehauses</field>
+		<field name="type">ir.actions.server</field>
+		<field name="model_id" ref="model_baselinker" />
+		<field name="state">code</field>
+		<field name="code">model.getInventoryWarehouses()</field>
+	</record>
+	
+	<record id="action_gisl" model="ir.actions.server">
+		<field name="name">Get Inventory Storages List</field>
+		<field name="type">ir.actions.server</field>
+		<field name="model_id" ref="model_bl_storages" />
+		<field name="state">code</field>
+		<field name="code">model.getStoragesList()</field>
+	</record>
+
+	<record id="action_gesl" model="ir.actions.server">
+		<field name="name">Get External Storages List</field>
+		<field name="type">ir.actions.server</field>
+		<field name="model_id" ref="model_bl_externalstorages" />
+		<field name="state">code</field>
+		<field name="code">model.getExternalStoragesList()</field>
+	</record>
+
+
+	<!-- MENU ELEMENTs  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<menuitem name="BaseLinker" id="menu_baselinker_menu" sequence="999" parent="sale.sale_menu_root"  />
+	<menuitem name="Logger" id="menu_iapi" sequence="112" parent="menu_baselinker_menu" action="action_iapi" />
+
+	<menuitem name="Models Data" id="menu_baselinker_model_data_menu" sequence="1" parent="menu_baselinker_menu"  />
+	<menuitem name="Order Status List" id="menu_osl" sequence="214" parent="menu_baselinker_model_data_menu" action="action_osl" />
+	<menuitem name="Order Sources" id="menu_osrc" sequence="216" parent="menu_baselinker_model_data_menu" action="action_osrc" />
+	<menuitem name="== Catalog / Inventory ==" id="menu_osci" sequence="218" parent="menu_baselinker_model_data_menu" action="action_osci" />
+	<menuitem name="Inventory Integrations" id="menu_oii" sequence="219" parent="menu_baselinker_model_data_menu" action="action_oii" />
+	<menuitem name="Inventory Warehouses" id="menu_owig" sequence="220" parent="menu_baselinker_model_data_menu" action="action_owig" />
+	<menuitem name="Inventory Storages List" id="menu_oisl" sequence="221" parent="menu_baselinker_model_data_menu" action="action_oisl" />
+	<menuitem name="External Storages List" id="menu_oesl" sequence="222" parent="menu_baselinker_model_data_menu" action="action_oesl" />
+
+	<menuitem name="API Query" id="menu_baselinker_api_query_menu" sequence="2" parent="menu_baselinker_menu"  />
+	<!--menuitem name="=> Get Product Details" id="menu_gipld" sequence="300" parent="menu_baselinker_api_query_menu" action="action_gipld" /-->
+	<menuitem name="=> Get Order Status List" id="menu_gosl" sequence="301" parent="menu_baselinker_api_query_menu" action="action_gosl" />
+	<!--menuitem name="=> Get Orders" id="menu_go" sequence="302" parent="menu_baselinker_api_query_menu" action="action_go" /-->
+	<menuitem name="=> Get Order Sources" id="menu_gos" sequence="303" parent="menu_baselinker_api_query_menu" action="action_gos" />
+	<menuitem name="=> Get Inventory Integrations" id="menu_giii" sequence="312" parent="menu_baselinker_api_query_menu" action="action_iii" />
+	<menuitem name="=> Get Inventory Warehouses" id="menu_giw" sequence="313" parent="menu_baselinker_api_query_menu" action="action_giw" />
+	<menuitem name="=> Get Inventory Storages List" id="menu_gisl" sequence="314" parent="menu_baselinker_api_query_menu" action="action_gisl" />
+	<menuitem name="=> Get External Storages List" id="menu_gesl" sequence="315" parent="menu_baselinker_api_query_menu" action="action_gesl" />
+	<menuitem name="=> Get Inventory Products Stoct" id="menu_gips" sequence="316" parent="menu_baselinker_api_query_menu" action="action_gips" />
+
+	<!-- Configuration-Settings -->
+	<record id="res_config_baselinker_settings_view_form" model="ir.ui.view">
+		<field name="name">rest.config.settings.view.form.inherit.account.rest</field>
+		<field name="model">res.config.settings</field>
+		<field name="priority" eval="50"/>
+		<field name="inherit_id" ref="base.res_config_settings_view_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//div[hasclass('app_settings_block')]" position="before">
+				<div class="app_settings_block" data-string="BaseLinker" string="BaseLinker" data-key="hfb_baselinker_api" >
+					<h2>
+						BaseLinker Integration
+					</h2>
+					<div class="row mt16 o_settings_container" >
+
+						<div class="col-12 col-lg-6 o_setting_box" >
+							<div class="o_setting_left_pane" />
+							<div class="o_setting_right_pane" >
+								<span class="o_form_label" >
+									Authorization API
+								</span>
+								<span class="fa fa-lg fa-building-o" title="Values set..." aria-label="Values set..." role="img" invisible="1" modifiers="{'invisible':true}"/>
+								<div class="text-muted" >
+								The authorization process
+								</div>
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="baselinker_api_login" class="col-lg-3 o_light_label" />
+										<field name="baselinker_api_login"/>
+									</div>
+								</div>
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="baselinker_api_passwd" class="col-lg-3 o_light_label" />
+										<field name="baselinker_api_passwd" password="True"/>
+									</div>
+								</div>
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="baselinker_api_token_key" class="col-lg-3 o_light_label" />
+										<field name="baselinker_api_token_key" />
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="col-xs-12 col-md-6 o_setting_box" >
+							<div class="o_setting_left_pane" />
+							<div class="o_setting_right_pane" >
+								<span class="o_form_label" >
+									Connection
+								</span>
+
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="baselinker_api_url" class="col-lg-3 o_light_label" />
+										<field name="baselinker_api_url" placeholder="https://ops-test.dataexgate.io/"/>
+									</div>
+								</div>
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="baselinker_api_connection_timeout" class="col-lg-3 o_light_label" />
+										<field name="baselinker_api_connection_timeout" placeholder="120"/>
+									</div>
+								</div>
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="baselinker_query_update_period" class="col-lg-3 o_light_label" />
+										<field name="baselinker_query_update_period" />
+									</div>
+								</div>
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="baselinker_api_query_limit" class="col-lg-3 o_light_label" />
+										<field name="baselinker_api_query_limit"  />
+									</div>
+								</div>
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="baselinker_query_date" class="col-lg-3 o_light_label" string="Get Orders from" />
+										<field name="baselinker_query_date" />
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="col-xs-12 col-md-6 o_setting_box" >
+							<div class="o_setting_left_pane" />
+							<div class="o_setting_right_pane" >
+								<span class="o_form_label" >
+									Application Settings
+								</span>
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="baselinker_inventory_id" class="col-lg-3 o_light_label" />
+										<field name="baselinker_inventory_id" placeholder="Default Catalog ID"/>
+										<button string="Get Default" type="object" name="button_get_default_Inventories" class="btn-primary" />
+									</div>
+								</div>
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="baselinker_price_group_id" class="col-lg-3 o_light_label" />
+										<field name="baselinker_price_group_id" placeholder="Default Price Group ID"/>
+										<button string="Get Default" type="object" name="button_get_default_PriceGroups" class="btn-primary" />
+									</div>
+								</div>
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="baselinker_warehouse_id" class="col-lg-3 o_light_label" />
+										<field name="baselinker_warehouse_id" placeholder="Default Warehouse ID"/>
+										<button string="Get Default" type="object" name="button_get_default_Warehouse" class="btn-primary" />
+									</div>
+								</div>
+								<div class="content-group" >
+                                    <div class="row mt16" >
+                                        <label for="baselinker_skip_bundle" class="col-lg-3 o_light_label" />
+                                        <field name="baselinker_skip_bundle" widget="boolean_toggle" />
+                                    </div>
+                                </div>
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="baselinker_products_restore" class="col-lg-3 o_light_label" />
+										<field name="baselinker_products_restore" widget="boolean_toggle" />
+									</div>
+								</div>
+								<separator />
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="baselinker_get_unconfirmed_orders" class="col-lg-3 o_light_label" />
+										<field name="baselinker_get_unconfirmed_orders" widget="boolean_toggle" />
+									</div>
+								</div>
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="baselinker_get_external_invoices" class="col-lg-3 o_light_label" />
+										<field name="baselinker_get_external_invoices" widget="boolean_toggle" />
+									</div>
+								</div>
+								<div class="content-group" >
+                                    <div class="row mt16" >
+                                        <label for="baselinker_set_debug" class="col-lg-3 o_light_label" />
+                                        <field name="baselinker_set_debug" widget="boolean_toggle" />
+                                    </div>
+                                </div>
+
+								<div class="content-group" >
+                                    <div class="row mt16" >
+										<label for="baselinker_set_debug" string="Status:" class="col-lg-3 o_light_label" />										
+                                        <button string="Set to IDLE" type="object" name="set_bl_order_sync_state" class="btn-primary" />
+                                    </div>
+                                </div>
+
+
+							</div>
+						</div>
+
+						<div class="col-xs-12 col-md-6 o_setting_box" >
+							<div class="o_setting_left_pane" />
+							<div class="o_setting_right_pane" >
+								<span class="o_form_label" >
+									 Defaults
+								</span>
+
+								<div class="content-group" >
+                                    <div class="row mt16" >
+                                        <label for="baselinker_client_invitation" class="col-lg-3 o_light_label" string="Send email invitation" />
+                                        <field name="baselinker_client_invitation" required="0" />
+                                    </div>
+                                </div>
+
+								<div class="content-group" >
+                                    <div class="row mt16" >
+                                        <label for="baselinker_product_create_limit" class="col-lg-3 o_light_label" />
+                                        <field name="baselinker_product_create_limit" required="0" />
+                                    </div>
+                                </div>
+
+                                 <div class="content-group" >
+                                    <div class="row mt16" >
+                                        <label for="baselinker_product_update_limit" class="col-lg-3 o_light_label" />
+                                        <field name="baselinker_product_update_limit" required="0" />
+                                    </div>
+                                </div>
+
+
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="baselinker_get_orders_by_status_id" string="Get Orders only with status or all" class="col-lg-3 o_light_label" />
+										<field name="baselinker_get_orders_by_status_id" required="0" />
+									</div>
+								</div>
+
+								 <div class="content-group" >
+									<div class="row mt16" >
+										<label for="baselinker_delivery_product_id" string="Delivery as Product in Orders" class="col-lg-3 o_light_label" />
+										<field name="baselinker_delivery_product_id" required="0" />
+									</div>
+								</div>
+
+								<div class="content-group" >
+									<div class="row mt16" >
+										<label for="baselinker_website_id" class="col-lg-3 o_light_label" />
+										<field name="baselinker_website_id" required="0" />
+									</div>
+								</div>
+
+
+
+							</div>
+						</div>
+
+
+
+					</div>
+				</div>
+			</xpath>
+		</field>
+	</record>
+
+
+
+
+
+	</data>
+</odoo>
